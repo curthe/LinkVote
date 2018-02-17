@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="bui/css/bui.css" />
+		<script type="text/javascript" src="jQuery/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bui/js/zepto.js" ></script>
+		<script type="text/javascript" src="bui/js/plugins/fastclick.js" ></script>
+		<script type="text/javascript" src="bui/js/bui.js" ></script>
+		<script type="text/javascript" src="bui/js/app/_config.js" ></script>
+	</head>
+	<body>
+		 <div class="bui-fluid">
+		 	 <div class="bui-box panel-head" style="background-color: aquamarine; height: 0.7rem;">
+		 	 	<div class="span12" style="text-align: center; color: white; font-weight: bold; font-size: 0.3rem; line-height: 0.65rem;">
+		 	 		link-vote
+		 	 	</div>
+		 	 </div>
+		 	 	<ul class="bui-list panel-body">
+					  <li class="bui-btn bui-box">
+					     	 <div class="ico">
+					     	 	<img src="#"/>
+					     	 </div>
+					     <div class="span1">
+						      <h3 class="item-title">协会旅游投票</h3>
+						      <p class="item-text">发起旅游协会投票</p>
+    					</div>
+					     	 <i class="icon-listright"></i>
+					  </li>
+					  <li class="bui-btn bui-box">
+					     	<div class="ico">
+					     	 	<img src="#"/>
+					     	</div>
+					     <div class="span1">
+						      <h3 class="item-title">公司奖项投票</h3>
+						      <p class="item-text">公司奖项设置</p>
+    					</div>
+					     	 <i class="icon-listright"></i>
+					  </li>
+					  <li class="bui-btn bui-box">
+					     	<div class="ico">
+					     	 	<img src="#"/>
+					     	</div>
+					     <div class="span1">
+						      <h3 class="item-title">课程评分</h3>
+						      <p class="item-text">课程简介</p>
+    					</div>
+					     	 <i class="icon-listright"></i>
+					  </li>
+					   <li class="bui-btn bui-box">
+					     	<div class="ico">
+					     	 	<img src="#"/>
+					     	</div>
+					     <div class="span1">
+						      <h3 class="item-title">随便投</h3>
+						      <p class="item-text">如果你无法表达你的想法</p>
+    					</div>
+					     	 <i class="icon-listright"></i>
+					  </li>
+				</ul>
+				<div class="bui-box" style="position: fixed; bottom: 0px;">	
+					<div class="span4">
+						<button type="bui-btn" class="btn btn-default" style="border: 0;">
+						  <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						</button>					
+					</div>
+					<div class="span4" style="text-align: center;">
+						<button type="bui-btn" class="btn btn-default" style="border: 0;">
+						  <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+						</button>
+					</div>
+					<div class="span4" style="text-align: right;">
+						<button type="bui-btn" class="btn btn-default" style="border: 0;">
+						  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
+		 </div>
+	</body>
+</html>

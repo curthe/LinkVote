@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="bui/css/bui.css" />
+
+	<script type="text/javascript" src="jQuery/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+	<script type="text/javascript" src="bui/js/zepto.js" ></script>
+	<script type="text/javascript" src="bui/js/plugins/fastclick.js" ></script>
+	<script type="text/javascript" src="bui/js/bui.js" ></script>
+	<script type="text/javascript" src="bui/js/app/_config.js" ></script>
+
+	<script>
+		bui.ready(function () {
+            // 这里写业务及控件初始化
+            
+        })
+
+
+    </script>
+</head>
+<body>
+	<div class="bui-fluid" style="text-align:center">
+		<div class="bui-box" style="background-color: aquamarine; height: 0.7rem;">
+			<div class="span12" style="text-align: center; color: white; font-weight: bold; font-size: 0.3rem; line-height: 0.65rem;">
+				link-vote
+			</div>			
+		</div>
+
+		
+				
+				     
+		<ul class="bui-list" >
+		    <li class="" style="padding:0.2rem;text-align:center;font-size:0.3rem;">
+		        <label class="bui-label" for="username" >篮球协会</label>		        
+		    </li>
+		    <li  >
+		    	<label class="bui-label" for="username" style="margin-left: 0.2rem; font-size:0.235rem;width: 100%;" >九月旅游投票:</label>		        
+		    </li>
+
+		    <li class="bui-btn bui-box clearactive">
+		    	<div style="">
+		    		<label class="bui-label" for="username" style="margin-left: 0.2rem; font-size:0.235rem;display:inline;">白云山</label>
+		    	
+		    		<input type="checkbox" name="" style="text-align:right;">
+		    	</div>
+
+		    </li>
+		    
+		    <li class="bui-btn bui-box clearactive">
+		    	<div id="myCarousel" class="carousel slide">
+		    		<!-- 轮播（Carousel）指标 -->
+		    		<ol class="carousel-indicators">
+		    			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		    			<li data-target="#myCarousel" data-slide-to="1"></li>
+		    			<li data-target="#myCarousel" data-slide-to="2"></li>
+		    		</ol>   
+		    		<!-- 轮播（Carousel）项目 -->
+		    		<div class="carousel-inner">
+		    			<div class="item active">
+		    			<img src="./bui/images/fenjing.jpg" alt="First slide">
+		    			</div>
+		    			<div class="item">
+		    				<img src="./bui/images/tig.jpg" alt="Second slide">
+		    			</div>
+		    			<div class="item">
+		    				<img src="./bui/images/tmg.jpg" alt="Third slide">
+		    			</div>
+		    		</div>
+		    		<!-- 轮播（Carousel）导航 -->
+		    		<a class="carousel-control left" href="#myCarousel" 
+		    		data-slide="prev">&lsaquo;</a>
+		    		<a class="carousel-control right" href="#myCarousel" 
+		    		data-slide="next">&rsaquo;</a>
+		    	</div> 
+		    </li>
+		    <li class="bui-btn bui-box clearactive">
+		    	<div style="padding:0.2rem;">
+			    	<span style="font-size:0.3rem;color:green;">简介：</span>
+			    	<p style="padding:0.2rem;">白云山，位于广州市白云区，为南粤名山之一，自古就有“羊城第一秀”之称。山体相当宽阔，由30多座山峰组成，为广东最高峰九连山的支脉。面积20.98平方公里，主峰摩星岭高382米。
+	白云山是广州市风景区行业的第一家5A级旅游景区，也是广州市唯一同时拥有“全国文明风景旅游区”、“国家5A级旅游景区”两项荣誉的景区。</p>
+					<label>链接：</label><a href="">http://www.baidu.com</a>
+				</div>
+
+		    </li>
+		    <!--第一个地点结束-->
+		    <hr/>
+
+		    <!--第二个地点-->
+		    <li class="bui-btn bui-box clearactive">
+		    	<div style="">
+		    		<label class="bui-label" for="username" style="margin-left: 0.2rem; font-size:0.235rem;display:inline;">帽峰山</label>
+		    	
+		    		<input type="checkbox" name="" style="text-align:right;">
+		    	</div>
+
+		    </li>
+		    
+		    <li class="bui-btn bui-box clearactive">
+		    	<div id="myCarousel" class="carousel slide">
+		    		<!-- 轮播（Carousel）指标 -->
+		    		<ol class="carousel-indicators">
+		    			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		    			<li data-target="#myCarousel" data-slide-to="1"></li>
+		    			<li data-target="#myCarousel" data-slide-to="2"></li>
+		    		</ol>   
+		    		<!-- 轮播（Carousel）项目 -->
+		    		<div class="carousel-inner">
+		    			<div class="item active">
+		    			<img src="./bui/images/fenjing.jpg" alt="First slide">
+		    			</div>
+		    			<div class="item">
+		    				<img src="./bui/images/tig.jpg" alt="Second slide">
+		    			</div>
+		    			<div class="item">
+		    				<img src="./bui/images/tmg.jpg" alt="Third slide">
+		    			</div>
+		    		</div>
+		    		<!-- 轮播（Carousel）导航 -->
+		    		<a class="carousel-control left" href="#myCarousel" 
+		    		data-slide="prev">&lsaquo;</a>
+		    		<a class="carousel-control right" href="#myCarousel" 
+		    		data-slide="next">&rsaquo;</a>
+		    	</div> 
+		    </li>
+		    <li class="bui-btn bui-box clearactive">
+		    	<div style="padding:0.2rem;">
+			    	<span style="font-size:0.3rem;color:green;">简介：</span>
+			    	<p style="padding:0.2rem;">白云山，位于广州市白云区，为南粤名山之一，自古就有“羊城第一秀”之称。山体相当宽阔，由30多座山峰组成，为广东最高峰九连山的支脉。面积20.98平方公里，主峰摩星岭高382米。
+	白云山是广州市风景区行业的第一家5A级旅游景区，也是广州市唯一同时拥有“全国文明风景旅游区”、“国家5A级旅游景区”两项荣誉的景区。</p>
+					<label>链接：</label><a href="">http://www.baidu.com</a>
+				</div>
+
+		    </li>
+
+		</ul>
+					 
+			   
+	
+		
+	</div>
+
+	
+</body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- settings：标签包含了许多的mybatis性能的配置 -->
+	<settings>
+		<!-- 使用驼峰命名,例如： 数据库字段 last_name 类的字段: lastName ，如果不开启驼峰命名，就会映射不上 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		 <!-- 
+		   jdbcTypeForNull：默认值为 OUTER,Oracle 不识别，配置成NULL，Oracle可以识别
+		  -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		
+		<!-- 
+		   配置懒加载
+		 -->
+		 <!-- 启用懒加载 -->
+		 <setting name="lazyLoadingEnabled" value="true"/>
+		 <!-- 
+		    不启用立即加载策略
+		  -->
+		 <setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+
+	<typeAliases>
+		<!-- 给包配置别名，下面的实体类就可以直接用类名即可 
+	
+		<typeAlias type="net.bingo.vote.model.user.User" alias="_User"/> -->
+	</typeAliases>
+	<!-- 使用分页插件 -->
+	<plugins>
+	   <plugin interceptor="com.github.pagehelper.PageInterceptor">
+	     <!-- 
+	     reasonable：分页合理化参数，默认值为false。
+	             当该参数设置为 true 时，pageNum<=0 时会查询第一页， 
+	     pageNum>pages（超过总数时），会查询最后一页。
+	             默认false 时，直接根据参数进行查询
+	      -->
+	     <property name="reasonable" value="true"/>
+	   </plugin>
+	</plugins>
+	
+	<!-- 
+	数据库的不同提供者,type默认值为DB_VENDOR(VendorDatabaseIdProvider) 
+	DB_VENDOR是从3.2.3版本开始使用的别名，
+	3.2.3(不含)以前的板本不支持此名称，需要使用VENDOR。
+	-->
+	<databaseIdProvider type="DB_VENDOR">
+	   <!-- 配置支持多个数据库 ,value属性要与mapper.xml中 sql语句 的databaseId 一致-->
+	  <property name="MySQL" value="mysql"/>
+	  <property name="Oracle" value="oracle"/>
+	</databaseIdProvider>
+</configuration>

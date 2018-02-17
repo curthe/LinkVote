@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.userProject.UserProjectDao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.userProject.UserProject">
+		<id column="vup_id" property="id" jdbcType="VARCHAR" />
+		<result column="u_id" property="uId" jdbcType="VARCHAR" />
+		<result column="p_id" property="pId" jdbcType="VARCHAR" />
+		<result column="participation" property="participation" jdbcType="VARCHAR" />
+		<result column="is_create_item" property="isCreateItem" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<sql id="Base_Column_List">
+		vup_id,u_id,p_id,participation,is_create_item
+	</sql>
+
+	<!-- 查找 -->
+	<select id="selectUserProject" parameterType="net.bingo.vote.model.userProject.UserProject"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM v_user_project WHERE 1=1
+		<if test="vo.id != null and '' != vo.id">and vup_id= #{vo.id,jdbcType=VARCHAR}</if>
+		<if test="vo.uId != null and '' != vo.uId ">and u_id =#{ vo.uId,jdbcType=VARCHAR }</if>
+		<if test="vo.pId != null and '' != vo.pId">and p_id= #{vo.pId,jdbcType=VARCHAR}</if>
+		<if test="vo.participation != null and '' != vo.participation ">and participation =#{ vo.participation,jdbcType=VARCHAR }</if>
+		<if test="vo.isCreateItem != null and '' != vo.isCreateItem">and is_create_item= #{vo.isCreateItem,jdbcType=VARCHAR}</if>
+	</select>
+	
+	<!-- 根据project查询所有的userProject对象 -->
+	<select id="listUserProject" parameterType="net.bingo.vote.model.userProject.UserProject"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM v_user_project WHERE 1=1
+		<if test="vo.pId != null and '' != vo.pId">and p_id= #{vo.pId,jdbcType=VARCHAR}</if>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insertUserProject" parameterType="net.bingo.vote.model.userProject.UserProject">
+		insert into v_user_project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id">vup_id,</if>
+			<if test="vo.uId != null and '' != vo.uId ">u_id,
+			</if>
+			<if test="vo.pId != null and '' != vo.pId">p_id,</if>
+			<if test="vo.participation != null and '' != vo.participation ">participation,
+			</if>
+			<if test="vo.isCreateItem != null and '' != vo.isCreateItem">is_create_item,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id">#{vo.id,jdbcType=VARCHAR},</if>
+			<if test="vo.uId != null and '' != vo.uId">#{vo.uId,jdbcType=VARCHAR},</if>
+			<if test="vo.pId != null and '' != vo.pId">#{vo.pId,jdbcType=VARCHAR},</if>
+			<if test="vo.participation != null and '' != vo.participation ">#{vo.participation,jdbcType=VARCHAR},</if>
+			<if test="vo.isCreateItem != null and '' != vo.isCreateItem">#{vo.isCreateItem,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id更新 -->
+	<update id="updateUserProject" parameterType="net.bingo.vote.model.userProject.UserProject">
+		update v_user_project
+		<set>
+			<if test="vo.uId != null and '' != vo.uId">u_id = #{vo.uId,jdbcType=VARCHAR},</if>
+			<if test="vo.pId != null and '' != vo.pId">p_id=#{vo.pId,jdbcType=VARCHAR},</if>
+			<if test="vo.participation != null and '' != vo.participation ">participation=#{vo.participation,jdbcType=VARCHAR},</if>
+			<if test="vo.isCreateItem != null and '' != vo.isCreateItem">is_create_item=#{vo.isCreateItem,jdbcType=VARCHAR},</if>
+		</set>
+		where vup_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteUserProject" parameterType="java.lang.String">
+		delete from v_user_project
+		where vup_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+</mapper>   

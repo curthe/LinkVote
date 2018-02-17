@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.group.GroupDao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.group.Group">
+		<id column="vg_id" property="id" jdbcType="VARCHAR" />
+		<result column="p_id" property="pId" jdbcType="VARCHAR" />
+		<result column="group_name" property="groupName" jdbcType="VARCHAR" />
+		<result column="group_leader" property="groupLeader" jdbcType="VARCHAR" />
+		<result column="up_id" property="upId" jdbcType="VARCHAR" />
+	</resultMap>
+   
+	<sql id="Base_Column_List">
+		vg_id,p_id,group_name,group_leader,up_id
+	</sql>
+
+
+	<!-- 新增 -->
+	<insert id="insertGroup" parameterType="net.bingo.vote.model.group.Group">
+		insert into v_group
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> vg_id,</if>
+			<if test="vo.groupLeader != null and '' != vo.groupLeader"> group_leader,</if>
+			<if test="vo.groupName != null and '' != vo.groupName"> group_name,</if>
+			<if test="vo.pId != null and '' != vo.pId "> p_id,</if>
+			<if test="vo.upId != null and '' != vo.upId"> up_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> #{vo.id,jdbcType=VARCHAR },</if>
+			<if test="vo.groupLeader != null and '' != vo.groupLeader"> #{vo.groupLeader,jdbcType=VARCHAR },</if>
+			<if test="vo.groupName != null and '' != vo.groupName">#{vo.groupName,jdbcType=VARCHAR },</if>
+			<if test="vo.pId != null and '' != vo.pId ">#{vo.pId,jdbcType=VARCHAR },</if>
+			<if test="vo.upId != null and '' != vo.upId"> #{vo.upId,jdbcType=VARCHAR },</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id更新 -->
+	<update id="updateGroup" parameterType="net.bingo.vote.model.group.Group">
+		update v_group
+		<set>
+			<if test="vo.groupLeader != null and '' != vo.groupLeader">group_leader= #{vo.groupLeader,jdbcType=VARCHAR },</if>
+			<if test="vo.groupName != null and '' != vo.groupName">group_name=#{vo.groupName,jdbcType=VARCHAR },</if>
+			<if test="vo.pId != null and '' != vo.pId ">p_id=#{vo.pId,jdbcType=VARCHAR },</if>
+			<if test="vo.upId != null and '' != vo.upId"> up_id=#{vo.upId,jdbcType=VARCHAR },</if>
+		</set>
+		where vg_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 查找 -->
+	<select id="selectGroup" parameterType="net.bingo.vote.model.group.Group"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM v_group WHERE 1=1
+			<if test="vo.id != null and '' != vo.id"> and vg_id=#{vo.id,jdbcType=VARCHAR }</if>
+			<if test="vo.groupLeader != null and '' != vo.groupLeader">and group_leader like CONCAT('%',#{vo.groupLeader,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.groupName != null and '' != vo.groupName">and group_name like CONCAT('%',#{vo.groupName,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.pId != null and '' != vo.pId ">and p_id like CONCAT('%',#{vo.pId,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.upId != null and '' != vo.upId"> and up_id like CONCAT('%',#{vo.upId,jdbcType=VARCHAR } ,'%')</if>
+	</select>
+
+
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteGroup" parameterType="java.lang.String">
+		delete from
+		v_group
+		where vg_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+
+</mapper>   

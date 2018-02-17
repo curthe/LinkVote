@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.optionTemplate.Template2Dao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.optionTemplate.Template2">
+		<id column="voi_id" property="id" jdbcType="VARCHAR" />
+		<result column="ot_id" property="otId" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="or_id" property="orId" jdbcType="VARCHAR" />
+		<result column="o_id" property="oId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		voi_id,ot_id,content,or_id,o_id
+	</sql>
+
+
+	<!-- 新增 -->
+	<insert id="insertTemplate2" parameterType="net.bingo.vote.model.optionTemplate.Template2">
+		insert into v_option_introduction_two
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> voi_id,</if>
+			<if test="vo.content != null and '' != vo.content"> content,</if>
+			<if test="vo.otId != null and '' != vo.otId "> ot_id,</if>
+			<if test="vo.orId != null and '' != vo.orId"> or_id,</if>
+			<if test="vo.oId != null and '' != vo.oId"> o_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> #{vo.id,jdbcType=VARCHAR },</if>
+			<if test="vo.content != null and '' != vo.content">#{vo.content,jdbcType=VARCHAR },</if>
+			<if test="vo.otId != null and '' != vo.otId ">#{vo.otId,jdbcType=VARCHAR },</if>
+			<if test="vo.orId != null and '' != vo.orId"> #{vo.orId,jdbcType=VARCHAR },</if>
+			<if test="vo.oId != null and '' != vo.oId"> #{vo.oId,jdbcType=VARCHAR },</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id更新 -->
+	<update id="updateTemplate2" parameterType="net.bingo.vote.model.optionTemplate.Template2">
+		update v_option_introduction_two
+		<set>
+			<if test="vo.content != null and '' != vo.content">content=#{vo.content,jdbcType=VARCHAR },</if>
+			<if test="vo.otId != null and '' != vo.otId ">ot_id=#{vo.otId,jdbcType=VARCHAR },</if>
+			<if test="vo.orId != null and '' != vo.orId"> or_id=#{vo.orId,jdbcType=VARCHAR },</if>
+			<if test="vo.oId != null and '' != vo.oId"> or_id=#{vo.oId,jdbcType=VARCHAR },</if>
+		</set>
+		where voi_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 查找 -->
+	<select id="selectTemplate2" parameterType="net.bingo.vote.model.optionTemplate.Template2"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM v_option_introduction_two WHERE 1=1
+			<if test="vo.id != null and '' != vo.id"> and voi_id=#{vo.id,jdbcType=VARCHAR }</if>
+			<if test="vo.content != null and '' != vo.content">and content like CONCAT('%',#{vo.content,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.otId != null and '' != vo.otId ">and ot_id like CONCAT('%',#{vo.otId,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.orId != null and '' != vo.orId"> and or_id like CONCAT('%',#{vo.orId,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.oId != null and '' != vo.oId"> and o_id like CONCAT('%',#{vo.oId,jdbcType=VARCHAR } ,'%')</if>
+	</select>
+
+
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteTemplate2" parameterType="java.lang.String">
+		delete from
+		v_option_introduction_two
+		where voi_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+
+</mapper>   

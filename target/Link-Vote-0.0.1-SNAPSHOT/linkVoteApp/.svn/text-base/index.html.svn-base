@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="bui/css/bui.css" />
+		<script type="text/javascript" src="jQuery/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bui/js/zepto.js" ></script>
+		<script type="text/javascript" src="bui/js/plugins/fastclick.js" ></script>
+		<script type="text/javascript" src="bui/js/bui.js" ></script>
+		<script type="text/javascript" src="bui/js/app/_config.js" ></script>
+</head>
+</html>

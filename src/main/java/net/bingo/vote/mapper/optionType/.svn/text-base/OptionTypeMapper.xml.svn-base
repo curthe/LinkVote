@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.optionType.OptionTypeDao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.optionType.OptionType">
+		<id column="vot_id" property="id" jdbcType="VARCHAR" />
+		<result column="option_type" property="optionType" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		vot_id,option_type
+	</sql>
+
+	<!-- 查找 -->
+	<select id="selectOptionType" parameterType="net.bingo.vote.model.optionType.OptionType"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM V_OPTION_TYPE WHERE 1=1
+		<if test="vo.id != null and '' != vo.id">and vot_id= #{vo.id,jdbcType=VARCHAR}</if>
+		<if test="vo.optionType != null and '' != vo.optionType ">and option_type=#{vo.optionType,jdbcType=VARCHAR }</if>
+		
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insertOptionType" parameterType="net.bingo.vote.model.optionType.OptionType">
+		insert into V_OPTION_TYPE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id">vot_id,</if>
+			<if test="vo.optionType != null and '' != vo.optionType ">option_type,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id">#{vo.id,jdbcType=VARCHAR},</if>
+			<if test="vo.optionType != null and '' != vo.optionType">#{vo.optionType,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id更新 -->
+	<update id="updateOptionType" parameterType="net.bingo.vote.model.optionType.OptionType">
+		update V_OPTION_TYPE
+		<set>
+			<if test="vo.optionType != null and '' != vo.optionType">option_type=#{vo.optionType,jdbcType=VARCHAR},</if>		
+		</set>
+		where vot_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteOptionType" parameterType="java.lang.String">
+		delete from V_OPTION_TYPE
+		where vot_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+</mapper>   

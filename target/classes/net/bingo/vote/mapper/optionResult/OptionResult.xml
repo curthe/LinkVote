@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.optionResult.OptionResultDao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.optionResult.OptionResult">
+		<id column="vor_id" property="id" jdbcType="VARCHAR" />
+		<result column="oi_id" property="oiId" jdbcType="VARCHAR" />
+		<result column="result" property="result" jdbcType="VARCHAR" />
+		<result column="u_id" property="uId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		vor_id,oi_id,result,u_id
+	</sql>
+
+
+	<!-- 新增 -->
+	<insert id="insertOptionResult" parameterType="net.bingo.vote.model.optionResult.OptionResult">
+		insert into v_option_result
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> vor_id,</if>
+			<if test="vo.result != null and '' != vo.result"> result,</if>
+			<if test="vo.oiId != null and '' != vo.oiId "> oi_id,</if>
+			<if test="vo.uId != null and '' != vo.uId"> u_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> #{vo.id,jdbcType=VARCHAR },</if>
+			<if test="vo.result != null and '' != vo.result">#{vo.result,jdbcType=VARCHAR },</if>
+			<if test="vo.oiId != null and '' != vo.oiId ">#{vo.oiId,jdbcType=VARCHAR },</if>
+			<if test="vo.uId != null and '' != vo.uId"> #{vo.uId,jdbcType=VARCHAR },</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id更新 -->
+	<update id="updateOptionResult" parameterType="net.bingo.vote.model.optionResult.OptionResult">
+		update v_option_result
+		<set>
+			<if test="vo.result != null and '' != vo.result">result=#{vo.result,jdbcType=VARCHAR },</if>
+			<if test="vo.oiId != null and '' != vo.oiId ">oi_id=#{vo.oiId,jdbcType=VARCHAR },</if>
+			<if test="vo.uId != null and '' != vo.uId"> u_id=#{vo.uId,jdbcType=VARCHAR },</if>
+		</set>
+		where vor_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 查找 -->
+	<select id="selectOptionResult" parameterType="net.bingo.vote.model.optionResult.OptionResult"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM v_option_result WHERE 1=1
+			<if test="vo.id != null and '' != vo.id"> and vor_id=#{vo.id,jdbcType=VARCHAR }</if>
+			<if test="vo.result != null and '' != vo.result">and result like CONCAT('%',#{vo.result,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.oiId != null and '' != vo.oiId ">and oi_id like CONCAT('%',#{vo.oiId,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.uId != null and '' != vo.uId"> and u_id like CONCAT('%',#{vo.uId,jdbcType=VARCHAR } ,'%')</if>
+	</select>
+	
+		<!-- 查找By uId pId-->
+	<select id="selectOptionResultByuprId" resultType="map">
+		SELECT
+			v.userProjecID,v.resultID
+		FROM
+			v_userproject_result v
+		WHERE
+			v.userProjecID=#{upId,jdbcType=VARCHAR }
+	</select>
+	
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteOptionResult" parameterType="java.lang.String">
+		delete from
+		v_option_result
+		where vor_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insertUserProjrct_OptionResult" >
+		INSERT INTO
+		v_userProject_result
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			userProjecID,
+			resultID,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{userProjecID,jdbcType=VARCHAR },
+			#{resultID,jdbcType=VARCHAR },
+		</trim>
+	</insert>
+
+</mapper>   

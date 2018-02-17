@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- 引入数据库资源文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+
+	<!-- 配置数据库连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="${mysql.user}"></property>
+		<property name="password" value="${mysql.password}"></property>
+		<property name="jdbcUrl" value="${mysql.url}"></property>
+		<property name="driverClass" value="${mysql.driver}"></property>
+	</bean>
+
+	<!-- 配置sqlsessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- mybatis全局配置文件的位置 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<!-- 配置映射文件的位置 -->
+		<property name="mapperLocations" value="classpath:net/bingo/vote/mapper/*/*.xml"></property>
+	</bean>
+
+	<!-- 自动扫描mapper接口 -->
+	<bean id="mapperScannerRegistrar" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="net.bingo.vote.dao"></property>
+	</bean>
+	<!-- 初始化 -->
+	
+	<!-- 配置事务 -->
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- 配置基于注解的事务，必要的使用xml配置 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* net.bingo.vote.service..*(..))"
+			id="txPointCut" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" />
+			<tx:method name="get*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	 <!-- 执行推送旅游投票的任务 -->
+	<bean id="travelVoteMessage" class="net.bingo.vote.sendMsg.TravelVoteMessage"></bean>
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+	<bean id="travelJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		
+		<property name="targetObject" ref="travelVoteMessage"></property>
+		
+		<!-- 任务类中需要执行的方法 -->
+		<property name="targetMethod" value="SendTravelVoteMessage"></property>
+
+		<!-- 上一次未执行完成的，要等待有再执行-->
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<!-- 基本的定时器，会绑定具体的任务。 --> 
+	<bean id="travelCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="travelJobDetail"></property>
+	  <property name="cronExpression" value="* 0/2 * * * ?"></property>
+	</bean>
+	
+	<bean id="travelScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref bean="travelCronTrigger" />
+	    </list>
+	  </property>
+	</bean>
+	
+	<!-- 定时器的配置 -->
+	   <!-- 执行课程投票的任务 -->
+	<bean id="courseVoteMessage" class="net.bingo.vote.sendMsg.CourseVoteMessage"></bean>
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+	<bean id="courseJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		
+		<property name="targetObject" ref="courseVoteMessage"></property>
+		
+		<!-- 任务类中需要执行的方法 -->
+		<property name="targetMethod" value="SendCourceVoteMessage"></property>
+
+		<!-- 上一次未执行完成的，要等待有再执行-->
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<!-- 基本的定时器，会绑定具体的任务。 --> 
+	<bean id="courseCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="courseJobDetail"></property>
+	  <property name="cronExpression" value="* 0/2 * * * ?"></property>
+	</bean>
+	
+	<bean id="courseScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref bean="courseCronTrigger" />
+	    </list>
+	  </property>
+	</bean>
+	
+	   <!-- 执行奖项投票的任务 -->
+	<bean id="prizeVoteMessage" class="net.bingo.vote.sendMsg.PrizeVoteMessage"></bean>
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+	<bean id="prizeJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		
+		<property name="targetObject" ref="prizeVoteMessage"></property>
+		
+		<!-- 任务类中需要执行的方法 -->
+		<property name="targetMethod" value="SendPrizeVoteMessage"></property>
+
+		<!-- 上一次未执行完成的，要等待有再执行-->
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<!-- 基本的定时器，会绑定具体的任务。 --> 
+	<bean id="prizeCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="prizeJobDetail"></property>
+	  <property name="cronExpression" value="* 0/2 * * * ?"></property>
+	</bean>
+	
+	<bean id="prizeScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref bean="prizeCronTrigger" />
+	    </list>
+	  </property>
+	</bean>
+
+</beans>

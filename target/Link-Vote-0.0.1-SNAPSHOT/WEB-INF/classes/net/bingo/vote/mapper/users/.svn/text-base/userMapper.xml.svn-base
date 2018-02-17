@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:将定义接口的类与xml绑定起来 -->
+<mapper namespace="net.bingo.vote.dao.users.UserDaoDemo">
+
+  <resultMap type="net.bingo.vote.model.users.UserDemo" id="userMap">
+		<id property="userId" column="id" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+	</resultMap>
+	<select id="selectUser" resultMap="userMap">
+	   select * from tbl_user
+	</select>
+
+</mapper>

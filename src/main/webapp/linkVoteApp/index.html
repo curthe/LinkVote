@@ -1,0 +1,258 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>微信</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bui/css/bui.css" />
+    <link rel="stylesheet" href="css/bui.css" />
+    <link rel="stylesheet" href="css/bui_weixin.css" />
+    <link rel="stylesheet" href="css/weixin.css" />
+
+
+    <!-- 依赖库 手机调试的js引用顺序如下 -->
+    <script src="js/zepto.js"></script>
+    <script src="js/plugins/fastclick.js"></script>
+    <!-- BUI库 -->
+    <script src="js/bui.js"></script>
+    <script src="js/app/_config.js"></script>
+
+    <script type="text/javascript" src="jQuery/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bui/js/zepto.js" ></script>
+    <script type="text/javascript" src="bui/js/plugins/fastclick.js" ></script>
+    <script type="text/javascript" src="bui/js/bui.js" ></script>
+    <script type="text/javascript" src="bui/js/app/_config.js" ></script>
+    <script>
+        bui.ready(function (viewport) {
+            var uiSlide = bui.slide({
+                id:"#uiSlide",
+                menu:"#nav",
+                children:".bui-tab-main ul",
+                animate: false,
+                scroll: true
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="bui-page">
+        <header class="bui-bar bui-bar-side">
+            <div class="bui-box" style="background-color: aquamarine; height: 0.7rem;">
+                <div class="span12" style="text-align: center; color: white; font-weight: bold; font-size: 0.3rem; line-height: 0.65rem;">
+                        link-vote
+                </div>
+                
+            </div>
+            <!--<div class="bui-bar-left">
+                
+            </div>
+            <div class="bui-bar-main">微信</div>
+            <div class="bui-bar-right">
+                
+                <a class="bui-btn"><i class="icon-search"></i></a>
+                <a class="bui-btn"><i class="icon-plus"></i></a>
+            </div>
+            -->
+        </header>
+
+        <main>
+            <div id="uiSlide" class="bui-tab">
+              <div class="bui-tab-main">
+                <ul>
+                  <!--消息页-->
+                  <li>
+                    <div class="bui-fluid">
+                      <div class="bui-box">
+                        <div class="span12">
+                          <div id="searchbar" class="bui-searchbar">
+                               <div class="bui-input">
+                                   <i class="icon-search"></i>
+                                   <input type="text" value="" placeholder="搜索"/>
+                               </div>
+                          </div>
+                          <!--
+                          <div class="bui-box-space" style="margin-top: 0.1rem;">
+                            <div class="span2">
+                              <div class="bui-btn"style="text-align: right;  border:0;" href="#">进行中</div>
+                            </div>
+                            <div class="span2">
+                              <div class="bui-btn"style="text-align: center;  border:0;" href="#">已开始</div>
+                            </div>
+                            <div class="span2">
+                              <div class="bui-btn" style="text-align: left;  border:0;" href="#">待开始</div>
+                            </div>
+                          </div>
+                          -->
+                          <div class="bui-bar-main">
+                            <ul id="tabMessageNav" class="bui-nav">
+                              <li class="bui-btn active">进行中</li>
+                              <li class="bui-btn">已开始</li>
+                              <li class="bui-btn">待开始</li>
+                            </ul>
+                          </div>
+                          <ul class="bui-list">
+                            <li class="bui-btn bui-box">
+                                 <div class="ico">
+                                  <img src="#"/>
+                                 </div>
+                               <div class="span1">
+                                  <h3 class="item-title">群助手</h3>
+                                  <p class="item-text">8个群有新消息</p>
+                              </div>
+                                 <i class="icon-listright"></i>
+                            </li>
+                            <li class="bui-btn bui-box">
+                                <div class="ico">
+                                  <img src="#"/>
+                                </div>
+                               <div class="span1">
+                                  <h3 class="item-title">群助手</h3>
+                                  <p class="item-text">8个群有新消息</p>
+                              </div>
+                                 <i class="icon-listright"></i>
+                            </li>
+                          </ul>
+              
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+
+                  <!--投票页-->
+                  <li>
+                    <div class="bui-fluid">                       
+                        <ul class="bui-list panel-body">
+                            <li class="bui-btn bui-box">
+                                 <div class="ico">
+                                  <img src="#"/>
+                                 </div>
+                               <div class="span1">
+                                  <h3 class="item-title">单人发起投票</h3>
+                                  <p class="item-text">单人编辑发起投票</p>
+                              </div>
+                                 <i class="icon-listright"></i>
+                            </li>
+                            <li class="bui-btn bui-box">
+                                 <div class="ico">
+                                  <img src="#"/>
+                                 </div>
+                               <div class="span1">
+                                  <h3 class="item-title">多人发起投票</h3>
+                                  <p class="item-text">多人商议发起投票</p>
+                              </div>
+                                 <i class="icon-listright"></i>
+                            </li>
+                            <li class="bui-btn bui-box" href="">
+                                <div class="ico">
+                                  <img src="#"/>
+                                </div>
+                               <div class="span1" >
+                                  <h3 class="item-title" ><a href="prizeVote.html">公司奖项投票</a></h3>
+                                  <p class="item-text">公司奖项设置</p>
+                              </div>
+                                 <i class="icon-listright"></i>
+                            </li>
+                            <li class="bui-btn bui-box">
+                                <div class="ico">
+                                  <img src="#"/>
+                                </div>
+                               <div class="span1">
+                                  <h3 class="item-title">课程评分</h3>
+                                  <p class="item-text">编辑课程的反馈评分</p>
+                              </div>
+                                 <i class="icon-listright"></i>
+                            </li>
+                             <li class="bui-btn bui-box">
+                                <div class="ico">
+                                  <img src="#"/>
+                                </div>
+                               <div class="span1">
+                                  <h3 class="item-title">协会旅游投票</h3>
+                                  <p class="item-text">觉得你的旅游该去哪</p>
+                              </div>
+                                 <i class="icon-listright"></i>
+                            </li>
+                        </ul>
+                    </div>
+                  </li>
+
+                  <!--我-->
+                  <li>
+                    <div id="messageScroll" class="bui-scroll">
+                      <div class="bui-scroll-head"></div>
+                      <div class="bui-scroll-main">
+                        
+                        
+                        <ul class="bui-list">
+                          <li class="bui-btn bui-box">
+                            <div class="thumbnail"><img src="images/face0.png" alt=""></div>
+                            <div class="span1">
+                              <h3 class="item-title">helr</h3>
+                              <p class="item-text">LinkID: hbbbb</p>
+                            </div>
+                            <i class="icon">&#xe657;</i>
+                          </li>
+                        </ul>
+
+                        <ul class="bui-list cate-list">
+                          <li class="bui-btn bui-box" >
+                            <i class="icon primary">&#xe66c;</i>
+                            <div class="span1" src>个人公共投票</div>
+                            <i class="icon-listright"></i>
+                          </li>
+                          <li class="bui-btn bui-box">
+                            <i class="icon warning">&#xe680;</i>
+                            <div class="span1">小组投票</div>
+                            <i class="icon-listright"></i>
+                          </li>
+                          <li class="bui-btn bui-box" href="prizeVote.html">
+                            <i class="icon danger">&#xe631;</i>
+                            <div class="span1">公司奖项投票</div>
+                            <i class="icon-listright"></i>
+                          </li>
+                          <li class="bui-btn bui-box">
+                            <i class="icon success">&#xe62d;</i>
+                            <div class="span1">社团投票</div>
+                            <i class="icon-listright"></i>
+                          </li>
+                          <li class="bui-btn bui-box">
+                            <i class="icon warning">&#xe62a;</i>
+                            <div class="span1">旅游投票</div>
+                            <i class="icon-listright"></i>
+                          </li>
+                        </ul>
+                        
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+
+              </div>
+            </div>  
+        </main>
+<footer>
+    <ul id="nav" class="bui-nav">
+        <li class="bui-btn bui-box-vertical">
+            <i class="icon-weixin">&#xe678;</i>
+            <div class="span1">消息</div>
+        </li>
+        
+        <li class="bui-btn bui-box-vertical">
+            <i class="icon-friend">&#xe635;<span class="bui-badges">1</span></i>
+            <div class="span1">投票</div>
+        </li>
+        <li class="bui-btn bui-box-vertical">
+            <i class="icon-mine">&#xe67b;</i>
+            <div class="span1">我</div>
+        </li>
+    </ul>
+
+</footer>
+</div>
+</body>
+</html>

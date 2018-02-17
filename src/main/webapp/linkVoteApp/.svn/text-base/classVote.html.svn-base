@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<!--
+    create by helr
+    time:15:52
+-->
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="bui/css/bui.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/star-rating.css">
+
+		<script type="text/javascript" src="jQuery/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bui/js/zepto.js" ></script>
+		<script type="text/javascript" src="bui/js/plugins/fastclick.js" ></script>
+		<script type="text/javascript" src="bui/js/bui.js" ></script>
+		<script type="text/javascript" src="bui/js/app/_config.js" ></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/star-rating.js" ></script>
+
+	<style type="text/css">
+		.spantitle{
+			font-weight: bold;
+			font-size: 0.4rem; 
+			
+		}
+		.spanLitle{
+			font-weight: bold;
+			font-size: 0.3rem;
+		}
+		
+	</style>
+
+	 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#comment").rating({
+              min: 0,
+              max: 5,
+              step: 1,
+              size: 'lg',
+              showClear: false          
+        });
+    </script>
+
+</head>
+<body>
+    <div class="bui-fluid">
+			<div class="bui-box" style="background-color: aquamarine; height: 0.7rem;">
+				<div class="span12" style="text-align: center; color: white; font-weight: bold; font-size: 0.3rem; line-height: 0.65rem;">
+					link-vote
+				</div>
+			</div>
+	</div>
+
+	<!--内容-->
+	<div class="bui-fluid" style="text-align:center">
+	    <div>
+			<p class="spantitle">课程名称</p>
+
+			<p style="padding-left:0.2rem;padding-right:0.2rem;text-align:left;">
+				<span class="spanLitle">课程介绍：</span>
+			地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP/IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间。</p>
+		</div>
+		<hr style="size:200px" />
+		
+		<div >
+			<ul class="bui-list">
+			    <li class="bui-btn bui-box">
+			        <label class="bui-label">主讲人</label>
+			        <div class="span1">
+			            <div class="bui-value">何立然</div>
+			        </div>
+			    </li>
+			    <li class="bui-btn bui-box">
+			        <label class="bui-label">时间</label>
+			        <div class="span1">
+			            <div class="bui-value">2017-8-1</div>
+			        </div>
+			        
+			    </li>
+			    <li class="bui-btn bui-box">
+			        <label class="bui-label">上课气氛</label>
+			        <div class="span1">
+			            <div class="bui-value"><input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" ></div>
+			        </div>			        
+			    </li>
+			    <li class="bui-btn bui-box">
+			        <label class="bui-label">老师口才</label>
+			        <div class="span1">
+			            <div class="bui-value"><input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" ></div>
+			        </div>			        
+			    </li>
+			    <li class="bui-btn bui-box">
+			        <label class="bui-label">上课时间</label>
+			        <div class="span1">
+			            <div class="bui-value"><input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" ></div>
+			        </div>			        
+			    </li>
+			    <li class="bui-btn bui-box">
+			        <label class="bui-label">上课效果</label>
+			        <div class="span1">
+			            <div class="bui-value"><input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" ></div>
+			        </div>			        
+			    </li>
+			    <li class="bui-btn bui-box">
+			        <label class="bui-label">建议：</label>
+			        <input type="text" class="bui-input" value="" placeholder="请提出你的建议">			        
+			    </li>
+			    
+			</ul>
+
+			<div class="container-y">
+			    <div class="bui-box-space">
+			        <div class="span1">
+			            <div class="bui-btn round">重置</div>
+			        </div>
+			        <div class="span1">
+			            <div class="bui-btn round primary">提交</div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+
+
+
+		<div class="bui-box" style="position: fixed; bottom: 0px;">	
+					<div class="span4">
+						<button type="bui-btn" class="btn btn-default" style="border: 0;">
+						  <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						</button>					
+					</div>
+					<div class="span4" style="text-align: center;">
+						<button type="bui-btn" class="btn btn-default" style="border: 0;">
+						  <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+						</button>
+					</div>
+					<div class="span4" style="text-align: right;">
+						<button type="bui-btn" class="btn btn-default" style="border: 0;">
+						  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
+		  </div>
+
+
+	</div>
+	
+
+	  </ul>
+		
+	</div>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function () {
+	        $(".rating-kv").rating();
+	    });
+    </script>
+</body>
+
+</html>

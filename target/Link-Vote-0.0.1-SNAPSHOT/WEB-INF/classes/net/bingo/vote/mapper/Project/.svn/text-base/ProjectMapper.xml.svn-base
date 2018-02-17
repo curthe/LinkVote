@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.project.ProjectDao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.project.Project">
+		<id column="vp_id" property="id" jdbcType="VARCHAR" />
+		<result column="project_title" property="title" jdbcType="VARCHAR" />
+		<result column="project_description" property="description" jdbcType="VARCHAR" />
+		<result column="project_start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="project_end_time" property="EndTime" jdbcType="TIMESTAMP" />
+		<result column="project_location" property="location" jdbcType="VARCHAR" />
+		<result column="project_special" property="special" jdbcType="VARCHAR" />
+		<result column="g_id" property="GId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		vp_id,project_title,project_description,project_start_time,project_end_time,project_location,project_special,g_id
+	</sql>
+
+	
+	<!-- 新增 -->
+	<insert id="insertProject" parameterType="net.bingo.vote.model.project.Project">
+		insert into V_PROJECT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> vp_id,</if>
+			<if test="vo.title != null and '' != vo.title"> project_title,</if>
+			<if test="vo.description != null and '' != vo.description"> project_description,</if>
+			<if test="vo.startTime != null and '' != vo.startTime "> project_start_time,</if>
+			<if test="vo.EndTime != null and '' != vo.EndTime"> project_end_time,</if>
+			<if test="vo.location != null and '' != vo.location"> project_location,</if>
+			<if test="vo.special != null and '' != vo.special"> project_special,</if>
+			<if test="vo.GId != null and '' != vo.GId"> g_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> #{vo.id,jdbcType=VARCHAR },</if>
+			<if test="vo.title != null and '' != vo.title">#{vo.title,jdbcType=VARCHAR },</if>
+			<if test="vo.description != null and '' != vo.description">#{vo.description,jdbcType=VARCHAR},</if>
+			<if test="vo.startTime != null and '' != vo.startTime ">#{vo.startTime,jdbcType=TIMESTAMP },</if>
+			<if test="vo.EndTime != null and '' != vo.EndTime">#{vo.EndTime,jdbcType=TIMESTAMP},</if> 
+			<if test="vo.location != null and '' != vo.location">#{vo.location,jdbcType=VARCHAR},</if>
+			<if test="vo.special != null and '' != vo.special">#{vo.special,jdbcType=VARCHAR },</if>
+			<if test="vo.GId != null and '' != vo.GId">#{vo.GId,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据id更新 -->
+	<update id="updateProject" parameterType="net.bingo.vote.model.project.Project">
+		update V_PROJECT
+		<set>
+			<if test="vo.title != null and '' != vo.title"> project_title =#{vo.title,jdbcType=VARCHAR },</if>
+			<if test="vo.description != null and '' != vo.description"> project_description= #{vo.description,jdbcType=VARCHAR},</if>
+			<if test="vo.startTime != null and '' != vo.startTime "> project_start_time  =#{vo.startTime,jdbcType=TIMESTAMP },</if>
+			<if test="vo.EndTime != null and '' != vo.EndTime"> project_end_time =#{vo.EndTime,jdbcType=TIMESTAMP},</if>
+			<if test="vo.location != null and '' != vo.location"> project_location= #{vo.location,jdbcType=VARCHAR},</if>
+			<if test="vo.special != null and '' != vo.special"> project_special =#{vo.special,jdbcType=VARCHAR },</if>
+			<if test="vo.GId != null and '' != vo.GId"> g_id= #{vo.GId,jdbcType=VARCHAR},</if>
+		</set>
+		where vp_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+	
+<!-- 查找 -->
+	<select id="selectProject" parameterType="net.bingo.vote.model.project.Project"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM V_PROJECT WHERE 1=1
+		<if test="vo.id != null and '' != vo.id">and vp_id= #{vo.id,jdbcType=VARCHAR}</if>
+		<if test="vo.title != null and '' != vo.title">and project_title like CONCAT('%',#{vo.title,jdbcType=VARCHAR } ,'%')</if>
+		<if test="vo.description != null and '' != vo.description">and project_description= #{vo.description,jdbcType=VARCHAR}</if>
+		<if test="vo.startTime != null and '' != vo.startTime ">and date(project_start_time)  &gt;= date(#{vo.startTime,jdbcType=TIMESTAMP })</if>
+		<if test="vo.EndTime != null and '' != vo.EndTime">and date(project_end_time) &lt;= date(#{vo.EndTime,jdbcType=TIMESTAMP})</if>
+		<if test="vo.location != null and '' != vo.location">and project_location= #{vo.location,jdbcType=VARCHAR}</if>
+		<if test="vo.special != null and '' != vo.special">and project_special like CONCAT('%',#{vo.special,jdbcType=VARCHAR } ,'%')</if>
+		<if test="vo.GId != null and '' != vo.GId">and g_id= #{vo.GId,jdbcType=VARCHAR}</if>
+	</select>
+
+	
+	
+	<!-- 根据主键删除 -->
+	<delete id="deleteProject" parameterType="java.lang.String">
+		delete from V_PROJECT
+		where vp_id = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+
+</mapper>   

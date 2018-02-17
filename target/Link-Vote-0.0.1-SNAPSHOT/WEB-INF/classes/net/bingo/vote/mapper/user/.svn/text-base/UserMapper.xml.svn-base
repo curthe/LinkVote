@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.user.UserDao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.user.User">
+		<id column="vu_id" property="id" jdbcType="VARCHAR" />
+		<result column="user_name" property="name" jdbcType="VARCHAR" />
+		<result column="user_phone" property="phone" jdbcType="VARCHAR" />
+		<result column="user_email" property="email" jdbcType="VARCHAR" />
+		<result column="user_picture" property="picture" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		vu_id,user_name,user_phone,user_email,user_picture
+	</sql>
+
+	<!-- 查找 -->
+	<select id="selectUser" parameterType="net.bingo.vote.model.user.User"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM V_USER WHERE 1=1
+		<if test="vo.id != null and '' != vo.id">and vu_id= #{vo.id,jdbcType=VARCHAR}</if>
+		<if test="vo.name != null and '' != vo.name ">and user_name like CONCAT('%',#{ vo.name,jdbcType=VARCHAR } ,'%')</if>
+		<if test="vo.phone != null and '' != vo.phone">and user_phone= #{vo.phone,jdbcType=VARCHAR}</if>
+		<if test="vo.email != null and '' != vo.email ">and user_email like CONCAT('%',#{ vo.email,jdbcType=VARCHAR } ,'%')</if>
+		<if test="vo.picture != null and '' != vo.picture">and user_picture= #{vo.picture,jdbcType=VARCHAR}</if>
+	</select>
+
+	<!-- 新增 -->
+	<insert id="insertUser" parameterType="net.bingo.vote.model.user.User">
+		insert into V_USER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id">vu_id,</if>
+			<if test="vo.name != null and '' != vo.name ">user_name,
+			</if>
+			<if test="vo.phone != null and '' != vo.phone">user_phone,</if>
+			<if test="vo.email != null and '' != vo.email ">user_email,
+			</if>
+			<if test="vo.picture != null and '' != vo.picture">user_picture,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id">#{vo.id,jdbcType=VARCHAR},</if>
+			<if test="vo.name != null and '' != vo.name">#{vo.name,jdbcType=VARCHAR},</if>
+			<if test="vo.phone != null and '' != vo.phone">#{vo.phone,jdbcType=VARCHAR},</if>
+			<if test="vo.email != null and '' != vo.email ">#{vo.email,jdbcType=VARCHAR},</if>
+			<if test="vo.picture != null and '' != vo.picture">#{vo.picture,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id更新 -->
+	<update id="updateUser" parameterType="net.bingo.vote.model.user.User">
+		update V_USER
+		<set>
+			<if test="vo.name != null and '' != vo.name">user_name = #{vo.name,jdbcType=VARCHAR},</if>
+			<if test="vo.phone != null and '' != vo.phone">user_phone=#{vo.phone,jdbcType=VARCHAR},</if>
+			<if test="vo.email != null and '' != vo.email ">user_email=#{vo.email,jdbcType=VARCHAR},</if>
+			<if test="vo.picture != null and '' != vo.picture">user_picture=#{vo.picture,jdbcType=VARCHAR},</if>
+		</set>
+		where vu_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteUser" parameterType="java.lang.String">
+		delete from V_USER
+		where vu_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+</mapper>   

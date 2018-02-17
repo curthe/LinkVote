@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.optionTemplate.Template3Dao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.optionTemplate.Template3">
+		<id column="voi_id" property="id" jdbcType="VARCHAR" />
+		<result column="ot_id" property="otId" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="content2" property="content2" jdbcType="VARCHAR" />
+		<result column="content3" property="content3" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="or_id" property="orId" jdbcType="VARCHAR" />
+		<result column="o_id" property="oId" jdbcType="VARCHAR" />
+		<result column="picture1" property="picture1" jdbcType="VARCHAR" />
+		<result column="picture2" property="picture2" jdbcType="VARCHAR" />
+		<result column="picture3" property="picture3" jdbcType="VARCHAR" />
+		<result column="picture4" property="picture4" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		voi_id,ot_id,content,content2,content3,title,or_id,o_id,picture1,picture2,picture3,picture4
+	</sql>
+
+
+	<!-- 新增 -->
+	<insert id="insertTemplate3" parameterType="net.bingo.vote.model.optionTemplate.Template3">
+		insert into v_option_introduction_three
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> voi_id,</if>
+			<if test="vo.title != null and '' != vo.title"> title,</if>
+			<if test="vo.content != null and '' != vo.content"> content,</if>
+			<if test="vo.content2 != null and '' != vo.content2"> content2,</if>
+			<if test="vo.content3 != null and '' != vo.content3"> content3,</if>
+			<if test="vo.otId != null and '' != vo.otId "> ot_id,</if>
+			<if test="vo.orId != null and '' != vo.orId"> or_id,</if>
+			<if test="vo.oId != null and '' != vo.oId"> o_id,</if>
+			<if test="vo.picture1 != null and '' != vo.picture1"> picture1,</if>
+			<if test="vo.picture2 != null and '' != vo.picture2"> picture2,</if>
+			<if test="vo.picture3 != null and '' != vo.picture3"> picture3,</if>
+			<if test="vo.picture4 != null and '' != vo.picture4"> picture4,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> #{vo.id,jdbcType=VARCHAR },</if>
+			<if test="vo.title != null and '' != vo.title"> #{vo.title,jdbcType=VARCHAR },</if>
+			<if test="vo.content != null and '' != vo.content">#{vo.content,jdbcType=VARCHAR },</if>
+			<if test="vo.content2 != null and '' != vo.content2">#{vo.content2,jdbcType=VARCHAR },</if>
+			<if test="vo.content3 != null and '' != vo.content3">#{vo.content3,jdbcType=VARCHAR },</if>
+			<if test="vo.otId != null and '' != vo.otId ">#{vo.otId,jdbcType=VARCHAR },</if>
+			<if test="vo.orId != null and '' != vo.orId"> #{vo.orId,jdbcType=VARCHAR },</if>
+			<if test="vo.oId != null and '' != vo.oId"> #{vo.oId,jdbcType=VARCHAR },</if>
+			<if test="vo.picture1 != null and '' != vo.picture1">#{vo.picture1,jdbcType=VARCHAR },</if>
+			<if test="vo.picture2 != null and '' != vo.picture2">#{vo.picture2,jdbcType=VARCHAR },</if>
+			<if test="vo.picture3 != null and '' != vo.picture3">#{vo.picture3,jdbcType=VARCHAR },</if>
+			<if test="vo.picture4 != null and '' != vo.picture4">#{vo.picture4,jdbcType=VARCHAR },</if>
+		</trim>
+	</insert>
+
+	<!-- 根据id更新 -->
+	<update id="updateTemplate3" parameterType="net.bingo.vote.model.optionTemplate.Template3">
+		update v_option_introduction_three
+		<set>
+			<if test="vo.title != null and '' != vo.title">title= #{vo.title,jdbcType=VARCHAR },</if>
+			<if test="vo.content != null and '' != vo.content">content=#{vo.content,jdbcType=VARCHAR },</if>
+			<if test="vo.content2 != null and '' != vo.content2">content=#{vo.content2,jdbcType=VARCHAR },</if>
+			<if test="vo.content3 != null and '' != vo.content3">content=#{vo.content3,jdbcType=VARCHAR },</if>
+			<if test="vo.otId != null and '' != vo.otId ">ot_id=#{vo.otId,jdbcType=VARCHAR },</if>
+			<if test="vo.orId != null and '' != vo.orId"> or_id=#{vo.orId,jdbcType=VARCHAR },</if>
+			<if test="vo.oId != null and '' != vo.oId"> o_id=#{vo.oId,jdbcType=VARCHAR },</if>
+			<if test="vo.picture1 != null and '' != vo.picture1">picture1=#{vo.picture1,jdbcType=VARCHAR },</if>
+			<if test="vo.picture2 != null and '' != vo.picture2">picture1=#{vo.picture2,jdbcType=VARCHAR },</if>
+			<if test="vo.picture3 != null and '' != vo.picture3">picture1=#{vo.picture3,jdbcType=VARCHAR },</if>
+			<if test="vo.picture4 != null and '' != vo.picture4">picture1=#{vo.picture4,jdbcType=VARCHAR },</if>
+		</set>
+		where voi_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 查找 -->
+	<select id="selectTemplate3" parameterType="net.bingo.vote.model.optionTemplate.Template3"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM v_option_introduction_three WHERE 1=1
+			<if test="vo.id != null and '' != vo.id"> and voi_id=#{vo.id,jdbcType=VARCHAR }</if>
+			<if test="vo.title != null and '' != vo.title">and title like CONCAT('%',#{vo.title,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.content != null and '' != vo.content">and content like CONCAT('%',#{vo.content,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.content2 != null and '' != vo.content2">and content like CONCAT('%',#{vo.content2,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.content3 != null and '' != vo.content3">and content like CONCAT('%',#{vo.content3,jdbcType=VARCHAR } ,'%')</if>
+			<if test="vo.otId != null and '' != vo.otId ">and ot_id =#{vo.otId,jdbcType=VARCHAR }</if>
+			<if test="vo.orId != null and '' != vo.orId"> and or_id =#{vo.orId,jdbcType=VARCHAR }</if>
+			<if test="vo.oId != null and '' != vo.oId"> and o_id =#{vo.oId,jdbcType=VARCHAR }</if>
+	</select>
+
+
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteTemplate3" parameterType="java.lang.String">
+		delete from
+		v_option_introduction_three
+		where voi_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+
+</mapper>   

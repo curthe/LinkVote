@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bingo.vote.dao.project.ProjectDao">
+	<!-- parameterType 接收参数 ,预处理语句参数 -->
+	<resultMap id="BaseResultMap" type="net.bingo.vote.model.project.Project">
+		<id column="vp_id" property="id" jdbcType="VARCHAR" />
+		<result column="project_title" property="title" jdbcType="VARCHAR" />
+		<result column="project_description" property="description" jdbcType="VARCHAR" />
+		<result column="project_start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="project_end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="project_location" property="location" jdbcType="VARCHAR" />
+		<result column="project_special" property="special" jdbcType="VARCHAR" />
+		<result column="g_id" property="GId" jdbcType="VARCHAR" />
+		<result column="isGroup" property="isGroup" jdbcType="VARCHAR" />
+		<result column="isMulti" property="isMulti" jdbcType="VARCHAR" />
+		<result column="isAnonymous" property="isAnonymous" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		vp_id,project_title,project_description,project_start_time,project_end_time,project_location,project_special,g_id,isGroup,isMulti,isAnonymous
+	</sql>
+
+	
+	<!-- 新增 -->
+	<insert id="insertProject" parameterType="net.bingo.vote.model.project.Project">
+		insert into V_PROJECT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> vp_id,</if>
+			<if test="vo.title != null and '' != vo.title"> project_title,</if>
+			<if test="vo.description != null and '' != vo.description"> project_description,</if>
+			<if test="vo.startTime != null"> project_start_time,</if>
+			<if test="vo.endTime != null"> project_end_time,</if>
+			<if test="vo.location != null and '' != vo.location"> project_location,</if>
+			<if test="vo.special != null and '' != vo.special"> project_special,</if>
+			<if test="vo.GId != null and '' != vo.GId"> g_id,</if>
+			<if test="vo.isGroup != null and '' != vo.isGroup"> isGroup,</if>
+			<if test="vo.isMulti != null and '' != vo.isMulti"> isMulti,</if>
+			<if test="vo.isAnonymous != null and '' != vo.isAnonymous"> isAnonymous,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="vo.id != null and '' != vo.id"> #{vo.id,jdbcType=VARCHAR },</if>
+			<if test="vo.title != null and '' != vo.title">#{vo.title,jdbcType=VARCHAR },</if>
+			<if test="vo.description != null and '' != vo.description">#{vo.description,jdbcType=VARCHAR},</if>
+			<if test="vo.startTime != null">#{vo.startTime,jdbcType=TIMESTAMP },</if>
+			<if test="vo.endTime != null ">#{vo.endTime,jdbcType=TIMESTAMP},</if> 
+			<if test="vo.location != null and '' != vo.location">#{vo.location,jdbcType=VARCHAR},</if>
+			<if test="vo.special != null and '' != vo.special">#{vo.special,jdbcType=VARCHAR },</if>
+			<if test="vo.GId != null and '' != vo.GId">#{vo.GId,jdbcType=VARCHAR},</if>
+			<if test="vo.isGroup != null and '' != vo.isGroup">#{vo.isGroup,jdbcType=VARCHAR},</if>
+			<if test="vo.isMulti != null and '' != vo.isMulti"> #{vo.isMulti,jdbcType=VARCHAR},</if>
+			<if test="vo.isAnonymous != null and '' != vo.isAnonymous">#{vo.isAnonymous,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据id更新 -->
+	<update id="updateProject" parameterType="net.bingo.vote.model.project.Project">
+		update V_PROJECT
+		<set>
+			<if test="vo.title != null and '' != vo.title"> project_title =#{vo.title,jdbcType=VARCHAR },</if>
+			<if test="vo.description != null and '' != vo.description"> project_description= #{vo.description,jdbcType=VARCHAR},</if>
+			<if test="vo.startTime != null"> project_start_time  =#{vo.startTime,jdbcType=TIMESTAMP },</if>
+			<if test="vo.endTime != null "> project_end_time =#{vo.endTime,jdbcType=TIMESTAMP},</if>
+			<if test="vo.location != null and '' != vo.location"> project_location= #{vo.location,jdbcType=VARCHAR},</if>
+			<if test="vo.special != null and '' != vo.special"> project_special =#{vo.special,jdbcType=VARCHAR },</if>
+			<if test="vo.GId != null and '' != vo.GId"> g_id= #{vo.GId,jdbcType=VARCHAR},</if>
+			<if test="vo.isGroup != null and '' != vo.isGroup">#{vo.isGroup,jdbcType=VARCHAR},</if>
+			<if test="vo.isMulti != null and '' != vo.isMulti"> #{vo.isMulti,jdbcType=VARCHAR},</if>
+			<if test="vo.isAnonymous != null and '' != vo.isAnonymous">#{vo.isAnonymous,jdbcType=VARCHAR},</if>
+		</set>
+		where vp_id = #{vo.id,jdbcType=VARCHAR}
+	</update>
+	
+<!-- 查找 -->
+	<select id="selectProject" parameterType="net.bingo.vote.model.project.Project"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM V_PROJECT WHERE 1=1
+		<if test="vo.id != null and '' != vo.id">and vp_id= #{vo.id,jdbcType=VARCHAR}</if>
+		<if test="vo.title != null and '' != vo.title">and project_title like CONCAT('%',#{vo.title,jdbcType=VARCHAR } ,'%')</if>
+		<if test="vo.description != null and '' != vo.description">and project_description= #{vo.description,jdbcType=VARCHAR}</if>
+		<if test="vo.startTime != null  ">and date(project_start_time)  &gt;= date(#{vo.startTime,jdbcType=TIMESTAMP })</if>
+		<if test="vo.endTime != null ">and date(project_end_time) &lt;= date(#{vo.endTime,jdbcType=TIMESTAMP})</if>
+		<if test="vo.location != null and '' != vo.location">and project_location= #{vo.location,jdbcType=VARCHAR}</if>
+		<if test="vo.special != null and '' != vo.special">and project_special like CONCAT('%',#{vo.special,jdbcType=VARCHAR } ,'%')</if>
+		<if test="vo.GId != null and '' != vo.GId">and g_id= #{vo.GId,jdbcType=VARCHAR}</if>
+		<if test="vo.isGroup != null and '' != vo.isGroup">#{vo.isGroup,jdbcType=VARCHAR},</if>
+		<if test="vo.isMulti != null and '' != vo.isMulti"> #{vo.isMulti,jdbcType=VARCHAR}</if>
+		<if test="vo.isAnonymous != null and '' != vo.isAnonymous">#{vo.isAnonymous,jdbcType=VARCHAR},</if>
+	</select>
+	
+	<!-- 根据主键删除 -->
+	<delete id="deleteProject" parameterType="java.lang.String">
+		delete from V_PROJECT
+		where vp_id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<!-- 
+	select 
+	p.project_title,p.project_description,p.vp_id
+from 
+	v_user_project as up ,v_project as p,v_user as u
+where
+	u.vu_id=up.u_id='wsz18829345923' 
+    and 
+    up.p_id=p.vp_id
+    and 
+    now()<p.project_end_time      
+    ;
+	 -->
+	<!-- 首页 查找进行中投票 进行中的-->
+	<select id="selectStartProjectById" resultType="map">
+(	SELECT
+
+				p.project_title,p.project_description,p.vp_id,p.project_end_time,vv.ot_id,p.isGroup
+			FROM 
+				v_project  p
+			LEFT JOIN
+				v_user_project up
+			ON up.p_id=p.vp_id 
+			LEFT JOIN
+				v_option vv
+			ON vv.p_id=p.vp_id
+			WHERE 
+				up.u_id in(
+					SELECT vu_id from v_user  WHERE v_user.vu_id=#{id}
+			)
+			HAVING p.project_end_time&gt;NOW()
+			LIMIT #{li},#{lo}
+)
+UNION 
+			
+(	SELECT
+				p.project_title,p.project_description,p.vp_id,p.project_end_time,vv.ot_id,p.isGroup
+			FROM 
+				v_project  p
+		
+			LEFT JOIN
+				v_user_project up
+			ON up.p_id=p.vp_id 
+			LEFT JOIN
+				v_option vv
+			ON vv.p_id=p.vp_id
+			WHERE 
+				p.isGroup='0'
+			HAVING p.project_end_time&gt;NOW()
+			LIMIT #{li},#{lo}
+)
+</select>
+<!-- 首页 查找进行中投票 已结束的-->
+		<select id="selectEndProjectById" resultType="map">
+(	SELECT
+				p.project_title,p.project_description,p.vp_id,p.project_end_time,vv.ot_id,p.isGroup
+			FROM 
+				v_project  p
+			LEFT JOIN
+				v_user_project up
+			ON up.p_id=p.vp_id 
+			LEFT JOIN
+				v_option vv
+			ON vv.p_id=p.vp_id
+			WHERE 
+				up.u_id in(
+					SELECT vu_id from v_user  WHERE v_user.vu_id=#{id}
+			)
+			HAVING p.project_end_time&lt;NOW()
+			LIMIT #{li},#{lo}
+)
+UNION 
+			
+(	SELECT
+				p.project_title,p.project_description,p.vp_id,p.project_end_time,vv.ot_id,p.isGroup
+			FROM 
+				v_project  p
+		
+			LEFT JOIN
+				v_user_project up
+			ON up.p_id=p.vp_id 
+			LEFT JOIN
+				v_option vv
+			ON vv.p_id=p.vp_id
+			WHERE 
+				p.isGroup='0'
+			HAVING p.project_end_time&lt;NOW()
+			LIMIT #{li},#{lo}
+)
+</select>
+
+<!-- 投票页面 查找指定userId、projectId的投票，信息-->
+	<select id="enterVoting" resultType="map" >
+		SELECT
+			t.*,p.*
+		FROM 
+		${tName}
+			as t,v_project as p
+		WHERE
+			t.ot_id=#{otId}
+			AND
+			t.o_id=#{oId}
+			ANd
+			p.vp_id=#{pId}
+	</select>
+	<!-- vote 查找prize的投票详情-->
+	<select id="getVotedResult" resultType="map" >
+		SELECT 
+			*
+		FROM
+			v_option_result o
+		WHERE o.vor_id
+		IN(
+			SELECT 
+				resultID
+			FROM
+				v_userproject_result 
+			WHERE
+				userProjecID
+			IN(
+				SELECT 
+					up.vup_id
+				FROM 
+					v_user_project up
+				WHERE
+				up.p_id=#{pId}   <!-- #{pId}-->
+	)
+)
+	</select>
+		<!-- vote 查找prize的投票结果数目-->
+	<select id="getVotedResultNum" resultType="map" >
+		SELECT 
+			result
+		FROM
+			v_option_result o
+		WHERE o.vor_id
+		IN(
+			SELECT 
+				resultID
+			FROM
+				v_userproject_result 
+			WHERE
+				userProjecID
+			IN(
+				SELECT 
+					up.vup_id
+				FROM 
+					v_user_project up
+				WHERE
+				up.p_id=#{pId}   <!-- #{pId}-->
+	)
+)GROUP BY  o.result
+	</select>
+</mapper>   

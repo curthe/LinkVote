@@ -1,0 +1,191 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=480,user-scalable=no" />
+
+
+<link rel="stylesheet" href="css/bingotouch.css" /> 
+<link rel="stylesheet" href="js/plugin/datepicker/datepicker.css" /> <!--该插件体积较大，用到时再引入-->
+
+<!-- 应用样式 -->
+<link rel="stylesheet" href="css/app.css" />
+
+<!-- 函数库 -->
+<script src="js/cordova.js"></script>
+<script src="js/zepto.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/baiduTemplate.js"></script>
+<script src="js/bingotouch.js"></script> 
+<script src="js/require.js"></script> 
+<script src="js/plugin/datepicker/datepicker.js"></script><!--该插件体积较大，用到时再引入-->
+
+<!-- 应用脚本 -->
+<script src="js/plugin/linkplugins.js"></script> 
+<script src="js/app/app.js"></script>
+ 
+
+<title>BingoTouch</title>
+<script type="text/javascript">
+
+	//Dom结构加载完成后执行
+	app.page.onReady = function() {
+		//to do
+	}
+
+	//页面所有元素加载完成后执行，deviceRready
+	app.page.onLoad = function() {
+		app.hint("欢迎使用BingoTouch!");
+
+		//后退键
+        var flag = 0;
+        document.addEventListener("backbutton", function() {
+            var isIndexPage = ui.Page.history.length <= 1 ? true : false; 
+            var userInfo;
+            //已在首页
+            if (isIndexPage) {
+                if (flag == 0) {
+
+   			app.link.getUserInfoByCellphoneOrEmail("18271891051",function(result){
+    		userInfo=result;
+    		//app.hint(userInfo);
+				})
+				
+	//demo//demo//demo//demo//demo//demo//demo//demo//demo//demo//demo//demo
+			var url="http://10.200.197.161:8080/Link-Vote/users2";
+		app.post(url,{key:userInfo},function(res){
+			var ress=JSON.stringify(res);
+			app.alert(typeof(res)+':'+ress);
+			//$("#result").html("返回值类型:"+typeof(res)+"<br/> 结果:"+ JSON.stringify(res));
+		},function(res){
+			//失败的时候
+			app.alert(res);
+		});		
+		//demo//demo//demo//demo//demo//demo//demo//demo//demo//demo
+                    app.hint("再按一次就退出应用了!!!");
+                    flag = flag + 1;
+                    //5s后重新设置回去
+                    setTimeout(function() {
+                        flag = 0;
+                    }, 5000);
+                } else if (flag == 1) {
+                    app.exit();
+                }
+            } else{
+                //单页后退，多页不处理
+                if(ui.settings.appType == 'single'){
+                    ui.Page.back();
+                } 
+            }
+
+
+        }, false);  
+	}
+</script>
+</head>
+<body class="desktop">
+	<div id="section_container">
+		<section id="index_section" class="active">
+			<div class="header" data-fixed="top">
+				<div class="title row-box">
+					<div class="box-left"></div>
+					<div class="span1">
+						<h1>BingoTouch</h1>
+					</div>
+					<div class="box-right">
+					</div>
+				</div>
+			</div>
+			<div class="content iscroll-wrapper">
+				<ul class="list-view">
+					<li>
+						<div data-role="BTButton" data-url="modules/ui-control/control_index.html" data-icon="icon-chevron-right" data-iconpos="right">
+							<div class="thumbnail">
+								<!-- <img src="images/icons/flat/21.png" alt=""/>  -->
+								<span class="icon-pushpin"></span>
+							</div>
+							<div class="thumbnail-text">
+								<h3>基础控件</h3>
+								<p>BingoTouch界面的基础构成</p>
+							</div>
+						</div>
+					</li>	
+					<li>
+						<div data-role="BTButton" data-url="modules/ui-component/component_index.html" data-icon="icon-chevron-right" data-iconpos="right">
+							<div class="thumbnail">
+								<!-- <img src="images/icons/flat/22.png" alt=""/> -->
+								<span class="icon-hammer"></span>
+							</div>
+							<div class="thumbnail-text">
+								<h3>高级组件</h3>
+								<p>可单独提供功能</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div data-role="BTButton" data-url="modules/ui-layout/layout_index.html"  data-icon="icon-chevron-right" data-iconpos="right">
+							<div class="thumbnail">
+								<!-- <img src="images/icons/flat/23.png" alt=""/> -->
+								<span class="icon-newspaper"></span>
+							</div>
+							<div class="thumbnail-text">
+								<h3>布局和表单</h3>
+								<p>布局是关键的学习点</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div data-role="BTButton" data-url="modules/ui-icon/icon_index.html" data-icon="icon-chevron-right" data-iconpos="right">
+							<div class="thumbnail">
+							<!-- 	<img src="images/icons/flat/11.png" alt=""/> -->
+								<span class="icon-brightness-contrast"></span>
+							</div>
+							<div class="thumbnail-text">
+								<h3>图标和皮肤</h3>
+								<p>Icon Font和颜色值、皮肤切换</p>
+							</div>
+						</div>
+					</li>
+
+					<li>
+						<div data-role="BTButton" data-url="modules/ui-lifecycle/lifecycle_section.html" data-icon="icon-chevron-right" data-iconpos="right">
+							<div class="thumbnail">
+								<span class="icon-tab"></span>
+							</div>
+							<div class="thumbnail-text">
+								<h3>页面生命周期</h3>
+								<p>演示单页模式下页面的生命周期</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div data-role="BTButton" data-url="modules/api/api_index.html"data-icon="icon-chevron-right" data-iconpos="right">
+							<div class="thumbnail">
+								<!-- <img src="images/icons/flat/24.png" alt=""/> -->
+								<span class="icon-link"></span>
+							</div>
+							<div class="thumbnail-text">
+								<h3>API接口</h3>
+								<p>调用原生功能的接口</p>
+							</div>
+						</div>
+					</li>	
+					<li>
+						<div data-role="BTButton" data-url="modules/api-link/api_link_index.html"  data-icon="icon-chevron-right" data-iconpos="right">
+							<div class="thumbnail">
+								<!-- <img src="images/icons/flat/25.png" alt=""/> -->
+								<span class="icon-office"></span>
+							</div>
+							<div class="thumbnail-text">
+								<h3>Link API示例</h3>
+								<p>Link接口必需在link上才能查看效果</p>
+							</div>
+						</div>
+					</li>																			
+				</ul>			 
+			</div>
+		</section>	
+	</div>
+</body>
+</html>

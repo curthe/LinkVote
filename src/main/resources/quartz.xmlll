@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 执行推送旅游投票的任务 -->
+	<bean id="travelVoteMessage" class="net.bingo.vote.sendMsg.TravelVoteMessage"></bean>
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+	<bean id="travelJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		
+		<property name="targetObject" ref="travelVoteMessage"></property>
+		
+		<!-- 任务类中需要执行的方法 -->
+		<property name="targetMethod" value="SendTravelVoteMessage"></property>
+
+		<!-- 上一次未执行完成的，要等待有再执行-->
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<!-- 基本的定时器，会绑定具体的任务。 --> 
+	<bean id="travelCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="travelJobDetail"></property>
+	  <property name="cronExpression" value="* 0/2 * * * ?"></property>
+	</bean>
+	
+	<bean id="travelScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref bean="travelCronTrigger" />
+	    </list>
+	  </property>
+	</bean>
+	
+	   <!-- 执行课程投票的任务 -->
+	<bean id="courseVoteMessage" class="net.bingo.vote.sendMsg.CourseVoteMessage"></bean>
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+	<bean id="courseJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		
+		<property name="targetObject" ref="courseVoteMessage"></property>
+		
+		<!-- 任务类中需要执行的方法 -->
+		<property name="targetMethod" value="SendCourceVoteMessage"></property>
+
+		<!-- 上一次未执行完成的，要等待有再执行-->
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<!-- 基本的定时器，会绑定具体的任务。 --> 
+	<bean id="courseCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="courseJobDetail"></property>
+	  <property name="cronExpression" value="0 45 21 * * ?"></property>
+	</bean>
+	
+	<bean id="travelScheduler2" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref bean="courseCronTrigger" />
+	    </list>
+	  </property>
+	</bean>
+	
+	   <!-- 执行奖项投票的任务 -->
+	<bean id="prizeVoteMessage" class="net.bingo.vote.sendMsg.PrizeVoteMessage"></bean>
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+	<bean id="prizeJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		
+		<property name="targetObject" ref="prizeVoteMessage"></property>
+		
+		<!-- 任务类中需要执行的方法 -->
+		<property name="targetMethod" value="SendPrizeVoteMessage"></property>
+
+		<!-- 上一次未执行完成的，要等待有再执行-->
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<!-- 基本的定时器，会绑定具体的任务。 --> 
+	<bean id="prizeCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="prizeJobDetail"></property>
+	  <property name="cronExpression" value="0 45 21 * * ?"></property>
+	</bean>
+	
+	<bean id="prizeScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	  <property name="triggers">
+	    <list>
+	      <ref bean="prizeCronTrigger" />
+	    </list>
+	  </property>
+	</bean>
+
+</beans>

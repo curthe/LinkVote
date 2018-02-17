@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+
+<!--编辑课程投票的页面，create by helr-->
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="bui/css/bui.css" />
+		
+
+		<script type="text/javascript" src="jQuery/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bui/js/zepto.js" ></script>
+		<script type="text/javascript" src="bui/js/plugins/fastclick.js" ></script>
+		<script type="text/javascript" src="bui/js/bui.js" ></script>
+		<script type="text/javascript" src="bui/js/app/_config.js" ></script>
+		
+    <script>
+        bui.ready(function () {
+            // 这里写业务及控件初始化
+            
+        })
+    </script>
+
+    <style type="text/css">
+		.spantitle{
+			font-weight: bold;
+			font-size: 0.4rem; 
+			
+		}
+		.spanLitle{
+			font-weight: bold;
+			font-size: 0.3rem;
+		}
+		
+		
+	</style>
+</head>
+<body>
+    <div class="bui-fluid">
+			<div class="bui-box" style="background-color: aquamarine; height: 0.7rem;">
+				<div class="span12" style="text-align: center; color: white; font-weight: bold; font-size: 0.3rem; line-height: 0.65rem;">
+					课程编辑
+				</div>
+
+			</div>
+	</div>
+	<div class="bui-fluid" style="text-align:center;">
+		<ul class="bui-list">
+		    <li class="bui-btn bui-box clearactive">
+		        <label class="bui-label" for="username">课程名称：</label>
+		        <div class="span1">
+		            <input id="classname" type="text" class="bui-input" value="" placeholder="请输入课程名">
+		        </div>
+		    </li>
+		    <li class="bui-btn bui-box clearactive">
+		        <label class="bui-label" for="username">课程描述:</label>
+		        <div class="span1">
+		            <div class="form-group">
+						<textarea class="form-control" rows="3" ></textarea>
+					</div>
+		        </div>
+		    </li>
+		    <li class="bui-btn bui-box clearactive">
+		        <label class="bui-label" for="username">上课时间：</label>
+		        <input type="text" id="datepicker_input" readonly>
+
+		    </li>
+
+		    <li class="bui-btn bui-box clearactive">
+		        <label style="font-size:0.2rem;color:blue;" for="">教师信息</label>
+
+		    </li>
+
+
+		    <li class="bui-btn bui-box clearactive">
+		        <!--<button type="button" class="btn btn-default">教师相片：</button>-->
+		        <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">教师相片</button>
+
+		        <!--<div class="bui-btn round " href="">教师相片：</div>-->
+		        <div class="row">
+				  <div class="col-xs-6 col-md-3">
+					    <a href="#" class="thumbnail">
+					      	<img src="..." alt="...">
+					    </a>
+				  </div>
+				  
+				</div>
+		    </li>
+
+		    <li class="bui-btn bui-box clearactive">
+		        <label class="bui-label" for="username">教师名称：</label>
+		        <div class="span1">
+		            <input id="classname" type="text" class="bui-input" value="" placeholder="老师尊姓大名">
+		        </div>
+		    </li>
+		    <li class="bui-btn bui-box clearactive">
+		        <label class="bui-label" for="username">教师简介:</label>
+		        <div class="span1">
+		            <div class="form-group">
+						<textarea class="form-control" rows="3" ></textarea>
+					</div>
+		        </div>
+		    </li>
+
+			<li class="bui-btn bui-box clearactive">
+		        <button type="button" id="addOpt" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">增加选项</button>
+
+		        <input type="text" class="bui-input" value="" placeholder="选项名称">
+
+		    </li>
+		    <li class="bui-btn bui-box clearactive">
+		        
+
+		    </li>
+
+		</ul>
+
+		<button type="button" class="btn btn-default btn-lg" id="submitbox">
+		  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 提交
+		</button>
+
+	</div>
+	
+	<!-- 隐藏的弹出窗口 -->
+	<div id="dialog3" class="bui-dialog" 
+	    style="display:none;" >
+	  <div class="bui-dialog-head">真的发起投票？</div>
+	  <div class="bui-dialog-main">别后悔哦。。。。</div>
+	  <div class="bui-dialog-close">
+	    <i class="icon-close"></i>	    
+	  </div>
+	  <div class="bui-btn"><span style="color:red;" onclick="">确定</span></div>
+	  
+	  
+	</div>		
+
+	<script type="text/javascript">
+		
+		// 1. 弹窗带按钮
+		var input = $("#datepicker_input");
+		var uiPickerdate = bui.pickerdate({
+			handle:"#datepicker_input",
+			onChange: function(value) {
+				input.val(value);
+			}
+		});
+
+		//2.添加老师照片按钮	
+		$('#myButton').on('click', function () {
+	    var $btn = $(this).button('loading')
+	    // business logic...
+	    $btn.button('reset')
+	    })
+
+	    //3.添加调查项	
+		$('#addOpt').on('click', function () {
+	    var $btn = $(this).button('loading')
+	    // business logic...
+	    $btn.button('reset')
+	    })
+
+	    //弹窗控件
+		var dialog = bui.dialog({
+		    id: "#dialog3"
+		});
+
+		$('#submitbox').on("click",function() {
+		    dialog.open()
+		})
+
+
+	</script>
+</body>
+</html>
